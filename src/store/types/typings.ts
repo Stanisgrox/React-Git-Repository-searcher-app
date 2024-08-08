@@ -18,13 +18,15 @@ export interface IRepos {
 };
 
 export interface IGraphQLAnswer {
-    search: {
-        repositoryCount: number,
-        nodes: IRepos[],
-        pageInfo: {
-            endCursor: string,
-            hasNextPage: boolean,
-            hasPreviousPage: boolean
+    data: {
+        search: {
+            repositoryCount: number,
+            nodes: IRepos[],
+            pageInfo: {
+                endCursor: string,
+                hasNextPage: boolean,
+                hasPreviousPage: boolean
+            }
         }
     }
 }

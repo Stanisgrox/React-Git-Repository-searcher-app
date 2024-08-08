@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IRepos } from "../types/typings";
 
-const initialState = {
+interface ReposState {
+    repos: IRepos[],
+    isLoading: boolean,
+    error: string
+}
+
+const initialState: ReposState = {
     isLoading: false,
-    error: ''
+    error: '',
+    repos: []
 };
 
 export const repoSlice = createSlice({
@@ -11,14 +19,18 @@ export const repoSlice = createSlice({
     reducers: {
         repoFetchingInProgress(state) {
             state.isLoading = true;
+            state.error = '';
         },
-        repoFetchigComplete(state) {
+        repoFetchigComplete(state, action: PayloadAction<IRepos[]>) {
             state.isLoading = false;
-            state.error = ''
+            state.error = '';
+            state.repos = action.payload;
         },
         repoFetchingError(state, action: PayloadAction<string>) {
             state.isLoading = false;
-            state.error = action.payload
+            state.error = action.payload;
         }
     }
 });
+
+export default repoSlice.reducer;
