@@ -5,16 +5,16 @@ import { fetchRepos } from '../../store/reducers/repoActions';
 
 const MainScreen = () => {
     const dispatch = useAppdispatch();
-    const {repos, isLoading, error} = useAppSelector(state =>  state.repoReducer);
+    const {repos, isLoading, error, welcome} = useAppSelector(state =>  state.repoReducer);
 
     useEffect(() => {
-        console.log("EDD")
         dispatch(fetchRepos());
     }, [])
 
     return (
         <div className={styles.helloScreen}>
-            <h1>{!error?`Добро пожаловать` : `При отправке запроса произошла ошибка: ${error}`}</h1>
+            {welcome && <h1>{`Добро пожаловать`}</h1>}
+            {error && <h1>{`При отправке запроса произошла ошибка: ${error}`}</h1>}
         </div>
     )
 }

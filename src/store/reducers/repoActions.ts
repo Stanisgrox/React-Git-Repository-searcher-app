@@ -8,7 +8,7 @@ export const fetchRepos = () => async (dispatch: AppDispatch) => {
     try {
         dispatch(repoSlice.actions.repoFetchingInProgress());
         const endpoint = "https://api.github.com/graphql";
-        axios.defaults.headers.common = {'Authorization': `bearer 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`}
+        axios.defaults.headers.common = {'Authorization': `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`}
         const graphqlQuery = GET_REPOS_QUERY("Rust", "commiter-date-asc", 10, "");
         console.log(graphqlQuery)
         const response = await axios.post<IGraphQLAnswer>(endpoint, JSON.parse(`{"query": "${graphqlQuery}"}`));

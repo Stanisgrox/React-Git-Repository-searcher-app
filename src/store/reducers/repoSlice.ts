@@ -4,11 +4,13 @@ import { IRepos } from "../types/typings";
 interface ReposState {
     repos: IRepos[],
     isLoading: boolean,
-    error: string
+    error: string,
+    welcome: boolean
 }
 
 const initialState: ReposState = {
     isLoading: false,
+    welcome: true,
     error: '',
     repos: []
 };
@@ -20,6 +22,7 @@ export const repoSlice = createSlice({
         repoFetchingInProgress(state) {
             state.isLoading = true;
             state.error = '';
+            state.welcome = false;
         },
         repoFetchigComplete(state, action: PayloadAction<IRepos[]>) {
             state.isLoading = false;
