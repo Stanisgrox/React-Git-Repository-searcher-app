@@ -1,4 +1,4 @@
-import styles from './Search-Bar.module.scss';
+import styles from './Search-Bar.module.sass';
 
 const SearchBar = () => {
     return(
