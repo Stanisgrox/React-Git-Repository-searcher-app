@@ -5,7 +5,7 @@ import styles from './Paginator.module.sass';
 
 const Paginator = () => {
     
-    const {searchTerm, pageAmount, after, before, first, last} = useAppSelector(state =>  state.repoReducer);
+    const {searchTerm, after, before, first, last} = useAppSelector(state =>  state.repoReducer);
     const dispatch = useAppdispatch();
     const {data} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:stars-desc`, first: first, last: last,after: after, before: before});
     

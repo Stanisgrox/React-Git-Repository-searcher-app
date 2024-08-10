@@ -41,6 +41,8 @@ export const repoSlice = createSlice({
         },
         repoSetPageAmount(state, action: PayloadAction<number>) {
             state.pageAmount = action.payload;
+            if (state.first) state.first = Number(action.payload);
+            else state.last = Number(action.payload)
         },
         repoSetNextPageMarker(state, action: PayloadAction<string | undefined>) {
             state.after = action.payload;
