@@ -4,8 +4,8 @@ import styles from './SearchTable.module.sass';
 
 const SearchTable = () => {
 
-    const {searchTerm, pageAmount} = useAppSelector(state =>  state.repoReducer);
-    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm}`, first: pageAmount, after: undefined, before: undefined});
+    const {searchTerm, after, before, last, first} = useAppSelector(state =>  state.repoReducer);
+    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:stars-desc`, first: first, last: last, after: after, before: before});
     
     return (
         <div className={styles.wrapper}>

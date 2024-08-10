@@ -23,6 +23,7 @@ export interface IGraphQLAnswer {
             repositoryCount: number,
             nodes: IRepos[],
             pageInfo: {
+                startCursor: string,
                 endCursor: string,
                 hasNextPage: boolean,
                 hasPreviousPage: boolean
@@ -36,6 +37,7 @@ export interface RTKQueryAnswer {
         repositoryCount: number,
         nodes: IRepos[],
         pageInfo: {
+            startCursor: string,
             endCursor: string,
             hasNextPage: boolean,
             hasPreviousPage: boolean

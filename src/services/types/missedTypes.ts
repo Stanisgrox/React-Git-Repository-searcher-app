@@ -2,7 +2,8 @@
 //Line 46461 GetRepos: build.query func
 export interface GetReposQueryVariables {
     query: string,
-    first: number,
+    first: number | undefined,
+    last: number | undefined,
     after: string | undefined,
     before: string | undefined
 }

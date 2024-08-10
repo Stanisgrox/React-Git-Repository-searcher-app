@@ -1,5 +1,5 @@
-query GetRepos($query: String!, $first: Int!, $after: String, $before: String) {
-  search(query: $query, type: REPOSITORY, first: $first, after: $after, before: $before) {
+query GetRepos($query: String!, $first: Int, $last: Int, $after: String, $before: String) {
+  search(query: $query, type: REPOSITORY, first: $first, last: $last,after: $after, before: $before) {
     repositoryCount
     nodes {
       ... on Repository {
@@ -16,6 +16,7 @@ query GetRepos($query: String!, $first: Int!, $after: String, $before: String) {
       }
     }
     pageInfo {
+      startCursor
       endCursor
       hasNextPage
       hasPreviousPage

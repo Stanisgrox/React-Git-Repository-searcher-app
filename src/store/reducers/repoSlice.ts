@@ -6,7 +6,11 @@ interface ReposState {
     welcome: boolean,
     reposLoaded: boolean,
     searchTerm: string | undefined,
-    pageAmount: number
+    pageAmount: number,
+    after: string | undefined,
+    before: string | undefined,
+    first: number | undefined,
+    last: number | undefined
 }
 
 const initialState: ReposState = {
@@ -15,7 +19,11 @@ const initialState: ReposState = {
     error: '',
     reposLoaded: false,
     searchTerm: undefined,
-    pageAmount: 10
+    pageAmount: 10,
+    after: undefined,
+    before: undefined,
+    first: 10,
+    last: undefined
 };
 
 export const repoSlice = createSlice({
@@ -28,11 +36,23 @@ export const repoSlice = createSlice({
             state.error = '';
             state.reposLoaded = true;
         },
-        repoSetSearchTerm(state, action) {
-            state.searchTerm = action.payload
+        repoSetSearchTerm(state, action: PayloadAction<string | undefined>) {
+            state.searchTerm = action.payload;
         },
-        repoSetPageAmount(state, action) {
-            state.pageAmount = action.payload
+        repoSetPageAmount(state, action: PayloadAction<number>) {
+            state.pageAmount = action.payload;
+        },
+        repoSetNextPageMarker(state, action: PayloadAction<string | undefined>) {
+            state.after = action.payload;
+            state.before = undefined;
+            state.first = state.pageAmount;
+            state.last = undefined
+        },
+        repoSetPreviousPageMarker(state, action: PayloadAction<string | undefined>) {
+            state.before = action.payload;
+            state.after = undefined;
+            state.first = undefined;
+            state.last = state.pageAmount
         }
     }
 });
