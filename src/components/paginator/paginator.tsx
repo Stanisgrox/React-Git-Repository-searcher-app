@@ -1,6 +1,8 @@
+import styles from './Paginator.module.sass';
+
 const Paginator = () => {
     return (
-        <div>
+        <div className={styles.paginatorWrapper}>
             <label htmlFor="per-page">Rows per page:</label>
             <select name="per-page">
                 <option value={10}>10</option>
