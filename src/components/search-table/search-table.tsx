@@ -6,6 +6,8 @@ const SearchTable = () => {
 
     const {searchTerm} = useAppSelector(state =>  state.repoReducer);
     const {data, isLoading} = reposAPI.useGetReposQuery({query: `${searchTerm}`, first: 10, after: undefined, before: undefined});
+    console.table(data?.search.nodes);
+    console.log(isLoading)
     
     return (
         <div className={''}>
@@ -43,7 +45,7 @@ const SearchTable = () => {
                                         {node.name}
                                     </td>
                                     <td>
-                                        {node.primaryLanguage.name}
+                                        {node.primaryLanguage? node.primaryLanguage.name : "N/A"}
                                     </td>
                                     <td>
                                         {node.forks.totalCount}

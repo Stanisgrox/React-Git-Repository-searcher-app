@@ -8,7 +8,7 @@ export interface IRepos {
         totalCount: number
     },
     primaryLanguage: {
-        name: string
+        name: string | null
     },
     defaultBranchRef: {
         target: {
