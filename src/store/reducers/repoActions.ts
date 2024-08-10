@@ -1,20 +1,10 @@
-import axios from "axios";
 import { AppDispatch } from "../store";
-import { GET_REPOS_QUERY } from "../../utils/search";
-import { IGraphQLAnswer } from "../types/typings";
 import { repoSlice } from "./repoSlice";
 
-export const fetchRepos = (term: string) => async (dispatch: AppDispatch) => {
-    if (term === '') return;
-    try {
-        dispatch(repoSlice.actions.repoFetchingInProgress());
-        const endpoint = "https://api.github.com/graphql";
-        axios.defaults.headers.common = {'Authorization': `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`}
-        const graphqlQuery = GET_REPOS_QUERY(term, "commiter-date-asc", 10, "");
-        console.log(graphqlQuery)
-        const response = await axios.post<IGraphQLAnswer>(endpoint, JSON.parse(`{"query": "${graphqlQuery}"}`));
-        dispatch(repoSlice.actions.repoFetchigComplete(response.data.data.search.nodes));
-    } catch (e) {
-       dispatch(repoSlice.actions.repoFetchingError("Error fetching data"))
-    }
+export const searchClicked = () => async (dispatch: AppDispatch) => {;
+    dispatch(repoSlice.actions.repoWelcomeLeft());
+}
+
+export const repoSetSearchTerm = (term: string) => (dispatch: AppDispatch) => {
+    dispatch(repoSlice.actions.repoSetSearchTerm(term));
 }

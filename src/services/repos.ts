@@ -1,3 +1,4 @@
+import { RTKQueryAnswer } from "../store/types/typings";
 import { api as generatedApi } from "./generated"
 
 export const reposAPI = generatedApi.enhanceEndpoints({
@@ -5,8 +6,8 @@ export const reposAPI = generatedApi.enhanceEndpoints({
   endpoints: {
     GetRepos: {
       providesTags: ["Repos"],
-      transformResponse: (res: any) => {
-        return res.repos
+      transformResponse: (res: RTKQueryAnswer) => {
+        return res
       },
     },
   },

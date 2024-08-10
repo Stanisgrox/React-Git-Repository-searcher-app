@@ -30,3 +30,15 @@ export interface IGraphQLAnswer {
         }
     }
 }
+
+export interface RTKQueryAnswer {
+    search: {
+        repositoryCount: number,
+        nodes: IRepos[],
+        pageInfo: {
+            endCursor: string,
+            hasNextPage: boolean,
+            hasPreviousPage: boolean
+        }
+    }
+}

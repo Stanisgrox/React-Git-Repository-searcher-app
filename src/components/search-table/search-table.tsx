@@ -1,33 +1,65 @@
 import { reposAPI } from '../../services/repos';
+import { useAppSelector } from '../../store/hooks/redux';
 import styles from './SearchTable.module.sass';
 
 const SearchTable = () => {
-    const {data} = reposAPI.useGetReposQuery({query: "Rust", first: 10, after: undefined, before: undefined});
+
+    const {searchTerm} = useAppSelector(state =>  state.repoReducer);
+    const {data, isLoading} = reposAPI.useGetReposQuery({query: `${searchTerm}`, first: 10, after: undefined, before: undefined});
+    
     return (
         <div className={''}>
             <h2 className={styles.caption}>
                 Результаты поиска
             </h2>
-            <table>
-                <tr>
-                    <td>
-                        Название
-                    </td>
-                    <td>
-                        Язык
-                    </td>
-                    <td>
-                        Число форков
-                    </td>
-                    <td>
-                        Число звезд
-                    </td>
-                    <td>
-                        Дата обновления
-                    </td>
-                </tr>
-            </table>
-            {JSON.stringify(data?.data.search.nodes)}
+            <div className={styles.tableContainer}>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                Название
+                            </td>
+                            <td>
+                                Язык
+                            </td>
+                            <td>
+                                Число форков
+                            </td>
+                            <td>
+                                Число звезд
+                            </td>
+                            <td>
+                                Дата обновления
+                            </td>
+                        </tr>
+                    </thead>
+                    {isLoading? <>
+                        Загрузка...
+                    </>:
+                        <tbody>
+                            {data&& data.search.nodes.map((node) => 
+                                <tr key = {node.id}>
+                                    <td>
+                                        {node.name}
+                                    </td>
+                                    <td>
+                                        {node.primaryLanguage.name}
+                                    </td>
+                                    <td>
+                                        {node.forks.totalCount}
+                                    </td>
+                                    <td>
+                                        {node.stargazers.totalCount}
+                                    </td>
+                                    <td>
+                                        {node.defaultBranchRef.target.committedDate.split('T')[0].split('-').reverse().join('.')}
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    }
+                </table>
+            </div>
         </div>
     )
 }

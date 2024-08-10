@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppdispatch } from '../../store/hooks/redux';
-import { fetchRepos } from '../../store/reducers/repoActions';
+import { repoSetSearchTerm, searchClicked } from '../../store/reducers/repoActions';
 import styles from './Search-Bar.module.sass';
 
 const SearchBar = () => {
@@ -14,7 +14,11 @@ const SearchBar = () => {
                 onChange={(e) => setTerm(e.target.value)}
             />
             <button
-                onClick={() => dispatch(fetchRepos(term))}
+                onClick={() => {
+                    if (!term) return;
+                    dispatch(searchClicked());
+                    dispatch(repoSetSearchTerm(term));
+                }}
             >
                 Искать
             </button>

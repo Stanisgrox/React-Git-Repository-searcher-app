@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { baseApiWithGraphql } from './baseApi';
 import { GetReposQueryVariables } from './types/missedTypes';
-import { IGraphQLAnswer } from '../store/types/typings';
+import { RTKQueryAnswer } from '../store/types/typings';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -46138,7 +46138,7 @@ export const GetReposDocument = `
 
 const injectedRtkApi = baseApiWithGraphql.injectEndpoints({
   endpoints: (build) => ({
-    GetRepos: build.query<IGraphQLAnswer, GetReposQueryVariables>({
+    GetRepos: build.query<RTKQueryAnswer, GetReposQueryVariables>({
       query: (variables) => ({ document: GetReposDocument, variables })
     }),
   }),
