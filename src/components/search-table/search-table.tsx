@@ -4,13 +4,11 @@ import styles from './SearchTable.module.sass';
 
 const SearchTable = () => {
 
-    const {searchTerm} = useAppSelector(state =>  state.repoReducer);
-    const {data, isLoading} = reposAPI.useGetReposQuery({query: `${searchTerm}`, first: 10, after: undefined, before: undefined});
-    console.table(data?.search.nodes);
-    console.log(isLoading)
+    const {searchTerm, pageAmount} = useAppSelector(state =>  state.repoReducer);
+    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm}`, first: pageAmount, after: undefined, before: undefined});
     
     return (
-        <div className={''}>
+        <div className={styles.wrapper}>
             <h2 className={styles.caption}>
                 Результаты поиска
             </h2>
@@ -35,7 +33,7 @@ const SearchTable = () => {
                             </td>
                         </tr>
                     </thead>
-                    {isLoading? <>
+                    {isFetching? <>
                         Загрузка...
                     </>:
                         <tbody>

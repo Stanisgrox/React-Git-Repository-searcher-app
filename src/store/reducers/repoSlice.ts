@@ -5,7 +5,8 @@ interface ReposState {
     error: string,
     welcome: boolean,
     reposLoaded: boolean,
-    searchTerm: string | undefined
+    searchTerm: string | undefined,
+    pageAmount: number
 }
 
 const initialState: ReposState = {
@@ -13,7 +14,8 @@ const initialState: ReposState = {
     welcome: true,
     error: '',
     reposLoaded: false,
-    searchTerm: undefined
+    searchTerm: undefined,
+    pageAmount: 10
 };
 
 export const repoSlice = createSlice({
@@ -28,6 +30,9 @@ export const repoSlice = createSlice({
         },
         repoSetSearchTerm(state, action) {
             state.searchTerm = action.payload
+        },
+        repoSetPageAmount(state, action) {
+            state.pageAmount = action.payload
         }
     }
 });

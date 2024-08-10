@@ -4,6 +4,12 @@
     margin: 24px 32px
     font-weight: 400
 
+.wrapper
+    width: 100%
+    max-height: calc(100% - 76px)
+    display: block
+    overflow-y: auto
+
 .tableContainer
     padding-left: 32px
     padding-right: 16px
@@ -13,7 +19,7 @@
     border-collapse: collapse
     width: 100%
     color: #000000DE
-
+    font-size: 14px
 
 .tableContainer table tr
     border-bottom: 1px solid #0000001F
@@ -30,5 +36,9 @@
 .tableContainer tbody tr:hover
     background-color: #2196F30A
 
+.tableContainer tbody
+    line-height: 20px
+
 .tableContainer table thead
     font-weight: 500
+    line-height: 24px

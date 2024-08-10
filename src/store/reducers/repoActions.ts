@@ -8,3 +8,7 @@ export const searchClicked = () => async (dispatch: AppDispatch) => {;
 export const repoSetSearchTerm = (term: string) => (dispatch: AppDispatch) => {
     dispatch(repoSlice.actions.repoSetSearchTerm(term));
 }
+
+export const repoSetPageAmount = (amount: number) => (dispatch: AppDispatch) => {
+    dispatch(repoSlice.actions.repoSetPageAmount(amount));
+}

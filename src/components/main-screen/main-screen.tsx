@@ -2,7 +2,6 @@ import { useAppSelector } from '../../store/hooks/redux';
 import styles from './Main-Screen.module.sass';
 import Paginator from '../paginator/paginator';
 import SearchTable from '../search-table/search-table';
-import { reposAPI } from '../../services/repos';
 
 const MainScreen = () => {
 
