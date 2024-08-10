@@ -1,13 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import repoReducer from './reducers/repoSlice';
+import { reposAPI } from "../services/repos";
 
 const rootReducer = combineReducers({
-    repoReducer
+    repoReducer,
+    [reposAPI.reducerPath]: reposAPI.reducer
 });
 
 export const setupStore = () => {
     return configureStore({
-        reducer: rootReducer
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(reposAPI.middleware)
     })
 };
 

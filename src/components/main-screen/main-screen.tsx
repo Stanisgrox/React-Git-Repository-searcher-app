@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
-import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
+import { useAppSelector } from '../../store/hooks/redux';
 import styles from './Main-Screen.module.sass';
-import { fetchRepos } from '../../store/reducers/repoActions';
 import Paginator from '../paginator/paginator';
+import SearchTable from '../search-table/search-table';
 
 const MainScreen = () => {
-    const dispatch = useAppdispatch();
-    const {repos, isLoading, error, welcome, reposLoaded} = useAppSelector(state =>  state.repoReducer);
+
+    const {isLoading, error, welcome, reposLoaded} = useAppSelector(state =>  state.repoReducer);
 
     return (
         <div className={welcome || error? styles.helloScreen : styles.mainSearch}>
@@ -16,8 +15,8 @@ const MainScreen = () => {
             {reposLoaded && 
             <>
                 <div className={styles.resultsWindow}>
-                    {JSON.stringify(repos)}
-                    <Paginator></Paginator>
+                    <SearchTable />
+                    <Paginator />
                 </div>
                 <div className={styles.sidebar}>
                     Выберите репозиторий

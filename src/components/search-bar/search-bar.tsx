@@ -6,6 +6,7 @@ import styles from './Search-Bar.module.sass';
 const SearchBar = () => {
     const dispatch = useAppdispatch();
     const [term, setTerm] = useState('');
+
     return(
         <div className={styles.searchbar}>
             <input 
