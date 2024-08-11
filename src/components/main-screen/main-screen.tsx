@@ -7,9 +7,8 @@ import { reposAPI } from '../../services/repos';
 
 const MainScreen = () => {
 
-    const {welcome, reposLoaded} = useAppSelector(state =>  state.repoReducer);
-    const {data} = reposAPI.useGetInfoQuery({id: "MDEwOlJlcG9zaXRvcnk2NDU3OTcwNQ=="});
-    console.log(data)
+    const {welcome, reposLoaded, previewID} = useAppSelector(state =>  state.repoReducer);
+    const {data} = reposAPI.useGetInfoQuery({id: previewID});
 
     return (
         <div className={welcome? styles.helloScreen : styles.mainSearch}>
@@ -34,7 +33,7 @@ const MainScreen = () => {
                                 <Tag primary = {true}>{data.node.primaryLanguage? data.node.primaryLanguage.name : "N/A"}</Tag>
                                 <div>{data.node.stargazers.totalCount}</div>
                             </div>
-                            <div className={styles.repoMainInfo}>
+                            <div className={styles.repoLangs}>
                                 {
                                     data.node.languages?
                                     data.node.languages.nodes.map((node) => (<Tag primary={false}>{node.name}</Tag>))

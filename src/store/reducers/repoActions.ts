@@ -30,3 +30,7 @@ export const repoSetSorting = (sorting: string) => (dispatch: AppDispatch) => {
 export const repoSetScrolled = (scrolled: number) => (dispatch: AppDispatch) => {
     dispatch(repoSlice.actions.repoSetScrolled(scrolled));
 }
+
+export const infoSetID = (id: string) => (dispatch: AppDispatch) => {
+    dispatch(repoSlice.actions.infoSetID(id));
+}

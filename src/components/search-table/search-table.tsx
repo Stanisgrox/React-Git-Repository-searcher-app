@@ -1,6 +1,6 @@
 import { reposAPI } from '../../services/repos';
 import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
-import { repoSetSorting } from '../../store/reducers/repoActions';
+import { infoSetID, repoSetSorting } from '../../store/reducers/repoActions';
 import styles from './SearchTable.module.sass';
 
 const SearchTable = () => {
@@ -80,7 +80,7 @@ const SearchTable = () => {
                     </>:
                         <tbody>
                             {data&& data.search.nodes.map((node) => 
-                                <tr key = {node.id}>
+                                <tr key = {node.id} onClick={() => {dispatch(infoSetID(node.id))}}>
                                     <td>
                                         {node.name}
                                     </td>

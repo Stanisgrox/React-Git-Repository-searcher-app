@@ -12,7 +12,8 @@ interface ReposState {
     first: number | undefined,
     last: number | undefined,
     sorting: string,
-    scrolled: number
+    scrolled: number,
+    previewID: string
 }
 
 const initialState: ReposState = {
@@ -27,7 +28,8 @@ const initialState: ReposState = {
     first: 10,
     last: undefined,
     sorting: '',
-    scrolled: 0
+    scrolled: 0,
+    previewID: ''
 };
 
 export const repoSlice = createSlice({
@@ -71,6 +73,9 @@ export const repoSlice = createSlice({
         },
         repoSetScrolled(state, action: PayloadAction<number>) {
             state.scrolled = action.payload;
+        },
+        infoSetID(state, action: PayloadAction<string>) {
+            state.previewID = action.payload;
         }
     }
 });
