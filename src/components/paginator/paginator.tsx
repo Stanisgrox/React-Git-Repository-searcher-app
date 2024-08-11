@@ -8,7 +8,7 @@ const Paginator = () => {
     const {searchTerm, after, before, first, last, sorting, scrolled} = useAppSelector(state =>  state.repoReducer);
     const dispatch = useAppdispatch();
     const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:${sorting}`, first: first, last: last,after: after, before: before});
-    console.log(`scrolled: ${scrolled}, last: ${last}, first: ${first}`)
+
     return (
         <div className={styles.paginatorWrapper}>
             <label htmlFor="per-page">Rows per page:</label>

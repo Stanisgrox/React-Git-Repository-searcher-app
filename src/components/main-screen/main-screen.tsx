@@ -17,7 +17,9 @@ const MainScreen = () => {
                     <Paginator />
                 </div>
                 <div className={styles.sidebar}>
-                    Выберите репозиторий
+                    <div className={styles.placeholder}>
+                        Выберите репозиторий
+                    </div>
                 </div>    
             </>}
         </div>
