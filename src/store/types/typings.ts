@@ -17,21 +17,6 @@ export interface IRepos {
     }
 };
 
-export interface IGraphQLAnswer {
-    data: {
-        search: {
-            repositoryCount: number,
-            nodes: IRepos[],
-            pageInfo: {
-                startCursor: string,
-                endCursor: string,
-                hasNextPage: boolean,
-                hasPreviousPage: boolean
-            }
-        }
-    }
-}
-
 export interface RTKQueryAnswer {
     search: {
         repositoryCount: number,
@@ -43,4 +28,27 @@ export interface RTKQueryAnswer {
             hasPreviousPage: boolean
         }
     }
+}
+
+export interface RTKInfoQueryAnswer {
+    node: {
+        id: string,
+        name: string,
+        primaryLanguage: {
+            name: string
+        } | null,
+        stargazers: {
+            totalCount: number
+        },
+        licenseInfo: {
+            name: string
+        } | null,
+        languages: {
+            nodes: LangInfo[]
+        }
+    }
+}
+
+export interface LangInfo {
+    name: string
 }

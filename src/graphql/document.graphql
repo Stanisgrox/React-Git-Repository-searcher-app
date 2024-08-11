@@ -24,7 +24,7 @@ query GetRepos($query: String!, $first: Int, $last: Int, $after: String, $before
   }
 }
 
-query GetInfo($id: String!) {
+query GetInfo($id: ID!) {
 	node(id: $id){
     ... on Repository {
       id

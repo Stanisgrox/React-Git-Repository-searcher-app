@@ -7,3 +7,7 @@ export interface GetReposQueryVariables {
     after: string | undefined,
     before: string | undefined
 }
+
+export interface GetInfoQueryVariables {
+    id: string
+}

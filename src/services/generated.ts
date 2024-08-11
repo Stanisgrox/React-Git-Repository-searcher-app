@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { baseApiWithGraphql } from './baseApi';
-import { RTKQueryAnswer } from '../store/types/typings';
-import { GetReposQueryVariables } from './types/missedTypes';
+import { RTKInfoQueryAnswer, RTKQueryAnswer } from '../store/types/typings';
+import { GetInfoQueryVariables, GetReposQueryVariables } from './types/missedTypes';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -30403,33 +30403,17 @@ export type User = Actor & Node & PackageOwner & ProfileOwner & ProjectOwner & P
   suggestedListNames: Array<UserListSuggestion>;
   /** Repositories the user has contributed to, ordered by contribution rank, plus repositories the user has created */
   topRepositories: RepositoryConnection;
-  /**
-   * The amount in United States cents (e.g., 500 = $5.00 USD) that this entity has
-   * spent on GitHub to fund sponsorships. Only returns a value when viewed by the
-   * user themselves or by a user who can manage sponsorships for the requested organization.
-   */
   totalSponsorshipAmountAsSponsorInCents?: Maybe<Scalars['Int']['output']>;
-  /** The user's Twitter username. */
   twitterUsername?: Maybe<Scalars['String']['output']>;
-  /** Identifies the date and time when the object was last updated. */
   updatedAt: Scalars['DateTime']['output'];
-  /** The HTTP URL for this user */
   url: Scalars['URI']['output'];
-  /** Can the viewer pin repositories and gists to the profile? */
   viewerCanChangePinnedItems: Scalars['Boolean']['output'];
-  /** Can the current viewer create new projects on this owner. */
   viewerCanCreateProjects: Scalars['Boolean']['output'];
-  /** Whether or not the viewer is able to follow the user. */
   viewerCanFollow: Scalars['Boolean']['output'];
-  /** Whether or not the viewer is able to sponsor this user/organization. */
   viewerCanSponsor: Scalars['Boolean']['output'];
-  /** Whether or not this user is followed by the viewer. Inverse of isFollowingViewer. */
   viewerIsFollowing: Scalars['Boolean']['output'];
-  /** True if the viewer is sponsoring this user/organization. */
   viewerIsSponsoring: Scalars['Boolean']['output'];
-  /** A list of repositories the given user is watching. */
   watching: RepositoryConnection;
-  /** A URL pointing to the user's public website/blog. */
   websiteUrl?: Maybe<Scalars['URI']['output']>;
 };
 
@@ -30912,138 +30896,85 @@ export type UserWatchingArgs = {
   visibility?: InputMaybe<RepositoryVisibility>;
 };
 
-/** The possible durations that a user can be blocked for. */
 export enum UserBlockDuration {
-  /** The user was blocked for 1 day */
   OneDay = 'ONE_DAY',
-  /** The user was blocked for 30 days */
   OneMonth = 'ONE_MONTH',
-  /** The user was blocked for 7 days */
   OneWeek = 'ONE_WEEK',
-  /** The user was blocked permanently */
   Permanent = 'PERMANENT',
-  /** The user was blocked for 3 days */
   ThreeDays = 'THREE_DAYS'
 }
 
-/** Represents a 'user_blocked' event on a given user. */
 export type UserBlockedEvent = Node & {
   __typename?: 'UserBlockedEvent';
-  /** Identifies the actor who performed the event. */
   actor?: Maybe<Actor>;
-  /** Number of days that the user was blocked for. */
   blockDuration: UserBlockDuration;
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime']['output'];
-  /** The Node ID of the UserBlockedEvent object */
   id: Scalars['ID']['output'];
-  /** The user who was blocked. */
   subject?: Maybe<User>;
 };
 
-/** A list of users. */
 export type UserConnection = {
   __typename?: 'UserConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<User>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edit on user content */
 export type UserContentEdit = Node & {
   __typename?: 'UserContentEdit';
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime']['output'];
-  /** Identifies the date and time when the object was deleted. */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** The actor who deleted this content */
   deletedBy?: Maybe<Actor>;
-  /** A summary of the changes for this edit */
   diff?: Maybe<Scalars['String']['output']>;
-  /** When this content was edited */
   editedAt: Scalars['DateTime']['output'];
-  /** The actor who edited this content */
   editor?: Maybe<Actor>;
-  /** The Node ID of the UserContentEdit object */
   id: Scalars['ID']['output'];
-  /** Identifies the date and time when the object was last updated. */
   updatedAt: Scalars['DateTime']['output'];
 };
 
-/** A list of edits to content. */
 export type UserContentEditConnection = {
   __typename?: 'UserContentEditConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserContentEditEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<UserContentEdit>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edge in a connection. */
 export type UserContentEditEdge = {
   __typename?: 'UserContentEditEdge';
-  /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
   node?: Maybe<UserContentEdit>;
 };
 
-/** Represents a user. */
 export type UserEdge = {
   __typename?: 'UserEdge';
-  /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
   node?: Maybe<User>;
 };
 
-/** Email attributes from External Identity */
 export type UserEmailMetadata = {
   __typename?: 'UserEmailMetadata';
-  /** Boolean to identify primary emails */
   primary?: Maybe<Scalars['Boolean']['output']>;
-  /** Type of email */
   type?: Maybe<Scalars['String']['output']>;
-  /** Email id */
   value: Scalars['String']['output'];
 };
 
-/** A user-curated list of repositories */
 export type UserList = Node & {
   __typename?: 'UserList';
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime']['output'];
-  /** The description of this list */
   description?: Maybe<Scalars['String']['output']>;
-  /** The Node ID of the UserList object */
   id: Scalars['ID']['output'];
-  /** Whether or not this list is private */
   isPrivate: Scalars['Boolean']['output'];
-  /** The items associated with this list */
   items: UserListItemsConnection;
-  /** The date and time at which this list was created or last had items added to it */
   lastAddedAt: Scalars['DateTime']['output'];
-  /** The name of this list */
   name: Scalars['String']['output'];
-  /** The slug of this list */
   slug: Scalars['String']['output'];
-  /** Identifies the date and time when the object was last updated. */
   updatedAt: Scalars['DateTime']['output'];
-  /** The user to which this list belongs */
   user: User;
 };
 
 
-/** A user-curated list of repositories */
 export type UserListItemsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
@@ -31051,172 +30982,106 @@ export type UserListItemsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** The connection type for UserList. */
 export type UserListConnection = {
   __typename?: 'UserListConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserListEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<UserList>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edge in a connection. */
 export type UserListEdge = {
   __typename?: 'UserListEdge';
-  /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
   node?: Maybe<UserList>;
 };
 
-/** Types that can be added to a user list. */
 export type UserListItems = Repository;
 
-/** The connection type for UserListItems. */
 export type UserListItemsConnection = {
   __typename?: 'UserListItemsConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserListItemsEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<UserListItems>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edge in a connection. */
 export type UserListItemsEdge = {
   __typename?: 'UserListItemsEdge';
-  /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
   node?: Maybe<UserListItems>;
 };
 
-/** Represents a suggested user list. */
 export type UserListSuggestion = {
   __typename?: 'UserListSuggestion';
-  /** The ID of the suggested user list */
   id?: Maybe<Scalars['ID']['output']>;
-  /** The name of the suggested user list */
   name?: Maybe<Scalars['String']['output']>;
 };
 
-/** The user's description of what they're currently doing. */
 export type UserStatus = Node & {
   __typename?: 'UserStatus';
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime']['output'];
-  /** An emoji summarizing the user's status. */
   emoji?: Maybe<Scalars['String']['output']>;
-  /** The status emoji as HTML. */
   emojiHTML?: Maybe<Scalars['HTML']['output']>;
-  /** If set, the status will not be shown after this date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
-  /** The Node ID of the UserStatus object */
   id: Scalars['ID']['output'];
-  /** Whether this status indicates the user is not fully available on GitHub. */
   indicatesLimitedAvailability: Scalars['Boolean']['output'];
-  /** A brief message describing what the user is doing. */
   message?: Maybe<Scalars['String']['output']>;
-  /** The organization whose members can see this status. If null, this status is publicly visible. */
   organization?: Maybe<Organization>;
-  /** Identifies the date and time when the object was last updated. */
   updatedAt: Scalars['DateTime']['output'];
-  /** The user who has this status. */
   user: User;
 };
 
-/** The connection type for UserStatus. */
 export type UserStatusConnection = {
   __typename?: 'UserStatusConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserStatusEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<UserStatus>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edge in a connection. */
 export type UserStatusEdge = {
   __typename?: 'UserStatusEdge';
-  /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
   node?: Maybe<UserStatus>;
 };
 
-/** Ordering options for user status connections. */
 export type UserStatusOrder = {
-  /** The ordering direction. */
   direction: OrderDirection;
-  /** The field to order user statuses by. */
   field: UserStatusOrderField;
 };
 
-/** Properties by which user status connections can be ordered. */
 export enum UserStatusOrderField {
-  /** Order user statuses by when they were updated. */
   UpdatedAt = 'UPDATED_AT'
 }
 
-/** A domain that can be verified or approved for an organization or an enterprise. */
 export type VerifiableDomain = Node & {
   __typename?: 'VerifiableDomain';
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime']['output'];
-  /** Identifies the primary key from the database. */
   databaseId?: Maybe<Scalars['Int']['output']>;
-  /** The DNS host name that should be used for verification. */
   dnsHostName?: Maybe<Scalars['URI']['output']>;
-  /** The unicode encoded domain. */
   domain: Scalars['URI']['output'];
-  /** Whether a TXT record for verification with the expected host name was found. */
   hasFoundHostName: Scalars['Boolean']['output'];
-  /** Whether a TXT record for verification with the expected verification token was found. */
   hasFoundVerificationToken: Scalars['Boolean']['output'];
-  /** The Node ID of the VerifiableDomain object */
   id: Scalars['ID']['output'];
-  /** Whether or not the domain is approved. */
   isApproved: Scalars['Boolean']['output'];
-  /** Whether this domain is required to exist for an organization or enterprise policy to be enforced. */
   isRequiredForPolicyEnforcement: Scalars['Boolean']['output'];
-  /** Whether or not the domain is verified. */
   isVerified: Scalars['Boolean']['output'];
-  /** The owner of the domain. */
   owner: VerifiableDomainOwner;
-  /** The punycode encoded domain. */
   punycodeEncodedDomain: Scalars['URI']['output'];
-  /** The time that the current verification token will expire. */
   tokenExpirationTime?: Maybe<Scalars['DateTime']['output']>;
-  /** Identifies the date and time when the object was last updated. */
   updatedAt: Scalars['DateTime']['output'];
-  /** The current verification token for the domain. */
   verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
-/** The connection type for VerifiableDomain. */
 export type VerifiableDomainConnection = {
   __typename?: 'VerifiableDomainConnection';
-  /** A list of edges. */
   edges?: Maybe<Array<Maybe<VerifiableDomainEdge>>>;
-  /** A list of nodes. */
   nodes?: Maybe<Array<Maybe<VerifiableDomain>>>;
-  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  /** Identifies the total count of items in the connection. */
   totalCount: Scalars['Int']['output'];
 };
 
-/** An edge in a connection. */
 export type VerifiableDomainEdge = {
   __typename?: 'VerifiableDomainEdge';
   cursor: Scalars['String']['output'];
@@ -45874,15 +45739,41 @@ export const GetReposDocument = `
   }
 }
     `;
+export const GetInfoDocument = `
+    query GetInfo($id: ID!) {
+  node(id: $id) {
+    ... on Repository {
+      id
+      name
+      primaryLanguage {
+        name
+      }
+      stargazers {
+        totalCount
+      }
+      licenseInfo {
+        name
+      }
+      languages(first: 10) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
+    `;
 
 const injectedRtkApi = baseApiWithGraphql.injectEndpoints({
   endpoints: (build) => ({
     GetRepos: build.query<RTKQueryAnswer, GetReposQueryVariables>({
       query: (variables) => ({ document: GetReposDocument, variables })
     }),
+    GetInfo: build.query<RTKInfoQueryAnswer, GetInfoQueryVariables>({
+      query: (variables) => ({ document: GetInfoDocument, variables })
+    }),
   }),
 });
 
 export { injectedRtkApi as api };
-export const { useGetReposQuery, useLazyGetReposQuery } = injectedRtkApi;
-
+export const { useGetReposQuery, useLazyGetReposQuery, useGetInfoQuery, useLazyGetInfoQuery } = injectedRtkApi;
