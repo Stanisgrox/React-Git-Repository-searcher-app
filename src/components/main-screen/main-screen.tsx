@@ -31,12 +31,12 @@ const MainScreen = () => {
                             </h2>
                             <div className={styles.repoMainInfo}>
                                 <Tag primary = {true}>{data.node.primaryLanguage? data.node.primaryLanguage.name : "N/A"}</Tag>
-                                <div>{data.node.stargazers.totalCount}</div>
+                                <div><img src='/assets/star.svg'/>{data.node.stargazers.totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</div>
                             </div>
                             <div className={styles.repoLangs}>
                                 {
                                     data.node.languages?
-                                    data.node.languages.nodes.map((node) => (<Tag primary={false}>{node.name}</Tag>))
+                                    data.node.languages.nodes.map((node) => (<Tag primary={false} key={node.name}>{node.name}</Tag>))
                                     :
                                     ''
                                 }
