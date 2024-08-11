@@ -14,7 +14,7 @@ import styles from './SearchTable.module.sass';
     search-table-caption.tsx
         При нажатии на ячейки заголовка в Redux меняется sorting. Всего возможно 10 значений: 5 параметров и 2 их варианта.
         Одновременная сортировка не предусмотрена техническим заданием.
-    
+
         Так же при нажатии и сортировке появляется картинка. В зависимости от DESC/ASC она может применить на себя второй стиль
         "arrowdown", который отражает ее по оси Y.
 */
@@ -31,19 +31,17 @@ const SearchTable = () => {
                 Результаты поиска
             </h2>
             <div className={styles.tableContainer}>
-                <table>
-                    <thead>
-                        <tr>
-                            <TableCaption field='name'>Название</TableCaption>
-                            <TableCaption field='language'>Язык</TableCaption>
-                            <TableCaption field='forks'>Число форков</TableCaption>
-                            <TableCaption field='stars'>Число звезд</TableCaption>
-                            <TableCaption field='updated'>Дата обновления</TableCaption>
-                        </tr>
-                    </thead>
-                    {isFetching? <>
-                        Загрузка...
-                    </>:
+                {isFetching? <>Загрузка...</> :
+                    <table>
+                        <thead>
+                            <tr>
+                                <TableCaption field='name'>Название</TableCaption>
+                                <TableCaption field='language'>Язык</TableCaption>
+                                <TableCaption field='forks'>Число форков</TableCaption>
+                                <TableCaption field='stars'>Число звезд</TableCaption>
+                                <TableCaption field='updated'>Дата обновления</TableCaption>
+                            </tr>
+                        </thead>
                         <tbody>
                             {data&& data.search.nodes.map((node) => 
                                 <tr key = {node.id} onClick={() => {dispatch(infoSetID(node.id))}}>
@@ -65,8 +63,8 @@ const SearchTable = () => {
                                 </tr>
                             )}
                         </tbody>
-                    }
-                </table>
+                    </table>  
+                }
             </div>
         </div>
     )
