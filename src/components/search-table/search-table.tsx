@@ -1,11 +1,13 @@
 import { reposAPI } from '../../services/repos';
-import { useAppSelector } from '../../store/hooks/redux';
+import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
+import { repoSetSorting } from '../../store/reducers/repoActions';
 import styles from './SearchTable.module.sass';
 
 const SearchTable = () => {
 
-    const {searchTerm, after, before, last, first} = useAppSelector(state =>  state.repoReducer);
-    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:stars-desc`, first: first, last: last, after: after, before: before});
+    const {searchTerm, after, before, last, first, sorting} = useAppSelector(state =>  state.repoReducer);
+    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:${sorting}`, first: first, last: last, after: after, before: before});
+    const dispatch = useAppdispatch();
     
     return (
         <div className={styles.wrapper}>
@@ -19,16 +21,52 @@ const SearchTable = () => {
                             <td>
                                 Название
                             </td>
-                            <td>
+                            <td
+                                onClick={() => {
+                                    switch (sorting) {
+                                        case 'language-asc': dispatch(repoSetSorting('language-desc')); break;
+                                        case 'language-desc':dispatch(repoSetSorting('language-asc')); break;
+                                        default:dispatch(repoSetSorting('language-asc')); break;
+                                    }
+                                    console.log(sorting)
+                                }}
+                            >
                                 Язык
                             </td>
-                            <td>
+                            <td
+                                onClick={() => {
+                                    switch (sorting) {
+                                        case 'forks-asc': dispatch(repoSetSorting('forks-desc')); break;
+                                        case 'forks-desc':dispatch(repoSetSorting('forks-asc')); break;
+                                        default:dispatch(repoSetSorting('forks-desc')); break;
+                                    }
+                                    console.log(sorting)
+                                }}
+                            >
                                 Число форков
                             </td>
-                            <td>
+                            <td
+                                onClick={() => {
+                                    switch (sorting) {
+                                        case 'stars-asc': dispatch(repoSetSorting('stars-desc')); break;
+                                        case 'stars-desc':dispatch(repoSetSorting('stars-asc')); break;
+                                        default:dispatch(repoSetSorting('stars-desc')); break;
+                                    }
+                                    console.log(sorting)
+                                }}
+                            >
                                 Число звезд
                             </td>
-                            <td>
+                            <td
+                                onClick={() => {
+                                    switch (sorting) {
+                                        case 'updated-asc': dispatch(repoSetSorting('updated-desc')); break;
+                                        case 'updated-desc':dispatch(repoSetSorting('updated-asc')); break;
+                                        default:dispatch(repoSetSorting('updated-desc')); break;
+                                    }
+                                    console.log(sorting)
+                                }}
+                            >
                                 Дата обновления
                             </td>
                         </tr>

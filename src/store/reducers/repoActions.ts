@@ -22,3 +22,7 @@ export const repoSetPreviousPageMarker = (page: string | undefined) => (dispatch
     if (!page) return;
     dispatch(repoSlice.actions.repoSetPreviousPageMarker(page));
 }
+
+export const repoSetSorting = (sorting: string) => (dispatch: AppDispatch) => {
+    dispatch(repoSlice.actions.repoSetSorting(sorting));
+}

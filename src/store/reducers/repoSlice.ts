@@ -10,7 +10,8 @@ interface ReposState {
     after: string | undefined,
     before: string | undefined,
     first: number | undefined,
-    last: number | undefined
+    last: number | undefined,
+    sorting: string
 }
 
 const initialState: ReposState = {
@@ -23,7 +24,8 @@ const initialState: ReposState = {
     after: undefined,
     before: undefined,
     first: 10,
-    last: undefined
+    last: undefined,
+    sorting: ''
 };
 
 export const repoSlice = createSlice({
@@ -55,6 +57,9 @@ export const repoSlice = createSlice({
             state.after = undefined;
             state.first = undefined;
             state.last = state.pageAmount
+        },
+        repoSetSorting(state, action: PayloadAction<string>) {
+            state.sorting = action.payload;
         }
     }
 });

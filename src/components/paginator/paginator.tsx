@@ -5,9 +5,9 @@ import styles from './Paginator.module.sass';
 
 const Paginator = () => {
     
-    const {searchTerm, after, before, first, last} = useAppSelector(state =>  state.repoReducer);
+    const {searchTerm, after, before, first, last, sorting} = useAppSelector(state =>  state.repoReducer);
     const dispatch = useAppdispatch();
-    const {data} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:stars-desc`, first: first, last: last,after: after, before: before});
+    const {data} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:${sorting}`, first: first, last: last,after: after, before: before});
     
 
     return (
@@ -30,7 +30,6 @@ const Paginator = () => {
                 <button
                     disabled = {!data?.search.pageInfo.hasPreviousPage}
                     onClick={() => {
-                        console.log(data?.search.pageInfo.startCursor)
                         dispatch(repoSetPreviousPageMarker(data?.search.pageInfo.startCursor))
                     }}
                 >
@@ -39,7 +38,6 @@ const Paginator = () => {
                 <button
                     disabled = {!data?.search.pageInfo.hasNextPage}
                     onClick={() => {
-                        console.log(data?.search.pageInfo.endCursor)
                         dispatch(repoSetNextPageMarker(data?.search.pageInfo.endCursor))
                     }}
                 >
