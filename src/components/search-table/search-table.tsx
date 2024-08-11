@@ -27,6 +27,13 @@ const SearchTable = () => {
                                     }
                                 }}
                             >
+                                <img 
+                                    src='/assets/arrow.svg' 
+                                    className={`${styles.arrowup} ${sorting === 'name-desc'? styles.arrowdown : ''}`}
+                                    style={{
+                                        display: `${sorting === 'name-asc'  || sorting ==='name-desc' ? 'inline-block' : 'none'}`
+                                    }}
+                                />
                                 Название
                             </td>
                             <td
@@ -38,6 +45,13 @@ const SearchTable = () => {
                                     }
                                 }}
                             >
+                                <img 
+                                    src='/assets/arrow.svg' 
+                                    className={`${styles.arrowup} ${sorting === 'language-desc'? styles.arrowdown : ''}`}
+                                    style={{
+                                        display: `${sorting === 'language-asc'  || sorting ==='language-desc' ? 'inline-block' : 'none'}`
+                                    }}
+                                />
                                 Язык
                             </td>
                             <td
@@ -49,6 +63,13 @@ const SearchTable = () => {
                                     }
                                 }}
                             >
+                                <img 
+                                    src='/assets/arrow.svg' 
+                                    className={`${styles.arrowup} ${sorting === 'forks-desc'? styles.arrowdown : ''}`}
+                                    style={{
+                                        display: `${sorting === 'forks-asc'  || sorting ==='forks-desc' ? 'inline-block' : 'none'}`
+                                    }}
+                                />
                                 Число форков
                             </td>
                             <td
@@ -60,6 +81,13 @@ const SearchTable = () => {
                                     }
                                 }}
                             >
+                                <img 
+                                    src='/assets/arrow.svg' 
+                                    className={`${styles.arrowup} ${sorting === 'stars-desc'? styles.arrowdown : ''}`}
+                                    style={{
+                                        display: `${sorting === 'stars-asc'  || sorting ==='stars-desc' ? 'inline-block' : 'none'}`
+                                    }}
+                                />
                                 Число звезд
                             </td>
                             <td
@@ -71,6 +99,13 @@ const SearchTable = () => {
                                     }
                                 }}
                             >
+                                <img 
+                                    src='/assets/arrow.svg' 
+                                    className={`${styles.arrowup} ${sorting === 'updated-desc'? styles.arrowdown : ''}`}
+                                    style={{
+                                        display: `${sorting === 'updated-asc'  || sorting ==='updated-desc' ? 'inline-block' : 'none'}`
+                                    }}
+                                />
                                 Дата обновления
                             </td>
                         </tr>
