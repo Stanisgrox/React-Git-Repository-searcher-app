@@ -7,7 +7,7 @@ const Paginator = () => {
     
     const {searchTerm, after, before, first, last, sorting, scrolled} = useAppSelector(state =>  state.repoReducer);
     const dispatch = useAppdispatch();
-    const {data} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:${sorting}`, first: first, last: last,after: after, before: before});
+    const {data, isFetching} = reposAPI.useGetReposQuery({query: `${searchTerm} sort:${sorting}`, first: first, last: last,after: after, before: before});
     
 
     return (
@@ -28,7 +28,7 @@ const Paginator = () => {
             </div>
             <div>
                 <button
-                    disabled = {!data?.search.pageInfo.hasPreviousPage}
+                    disabled = {!data?.search.pageInfo.hasPreviousPage || isFetching}
                     onClick={() => {
                         dispatch(repoSetScrolled(scrolled - (data?.search.nodes.length? data?.search.nodes.length : 0)));
                         dispatch(repoSetPreviousPageMarker(data?.search.pageInfo.startCursor));
@@ -36,7 +36,7 @@ const Paginator = () => {
                 >
                 </button>
                 <button
-                    disabled = {!data?.search.pageInfo.hasNextPage}
+                    disabled = {!data?.search.pageInfo.hasNextPage || isFetching}
                     onClick={() => {
                         dispatch(repoSetScrolled(scrolled + (data?.search.nodes.length? data?.search.nodes.length : 0)));
                         dispatch(repoSetNextPageMarker(data?.search.pageInfo.endCursor));

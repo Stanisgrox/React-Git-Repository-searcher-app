@@ -61978,771 +61978,207 @@ type User implements Actor & Node & PackageOwner & ProfileOwner & ProjectOwner &
     Returns the first _n_ elements from the list.
     """
     first: Int
-
-    """
-    Returns the last _n_ elements from the list.
-    """
     last: Int
-
-    """
-    Ordering options for repositories returned from the connection
-    """
     orderBy: RepositoryOrder!
-
-    """
-    How far back in time to fetch contributed repositories
-    """
     since: DateTime
   ): RepositoryConnection!
 
-  """
-  The amount in United States cents (e.g., 500 = $5.00 USD) that this entity has
-  spent on GitHub to fund sponsorships. Only returns a value when viewed by the
-  user themselves or by a user who can manage sponsorships for the requested organization.
-  """
   totalSponsorshipAmountAsSponsorInCents(
-    """
-    Filter payments to those that occurred on or after this time.
-    """
     since: DateTime
-
-    """
-    Filter payments to those made to the users or organizations with the specified usernames.
-    """
     sponsorableLogins: [String!] = []
-
-    """
-    Filter payments to those that occurred before this time.
-    """
     until: DateTime
   ): Int
 
-  """
-  The user's Twitter username.
-  """
   twitterUsername: String
-
-  """
-  Identifies the date and time when the object was last updated.
-  """
   updatedAt: DateTime!
-
-  """
-  The HTTP URL for this user
-  """
   url: URI!
-
-  """
-  Can the viewer pin repositories and gists to the profile?
-  """
   viewerCanChangePinnedItems: Boolean!
-
-  """
-  Can the current viewer create new projects on this owner.
-  """
   viewerCanCreateProjects: Boolean!
-
-  """
-  Whether or not the viewer is able to follow the user.
-  """
   viewerCanFollow: Boolean!
-
-  """
-  Whether or not the viewer is able to sponsor this user/organization.
-  """
   viewerCanSponsor: Boolean!
-
-  """
-  Whether or not this user is followed by the viewer. Inverse of isFollowingViewer.
-  """
   viewerIsFollowing: Boolean!
-
-  """
-  True if the viewer is sponsoring this user/organization.
-  """
   viewerIsSponsoring: Boolean!
-
-  """
-  A list of repositories the given user is watching.
-  """
   watching(
-    """
-    Affiliation options for repositories returned from the connection. If none
-    specified, the results will include repositories for which the current
-    viewer is an owner or collaborator, or member.
-    """
     affiliations: [RepositoryAffiliation]
-
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
     after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
     before: String
-
-    """
-    Returns the first _n_ elements from the list.
-    """
     first: Int
-
-    """
-    If non-null, filters repositories according to whether they have issues enabled
-    """
     hasIssuesEnabled: Boolean
-
-    """
-    If non-null, filters repositories according to whether they have been locked
-    """
     isLocked: Boolean
-
-    """
-    Returns the last _n_ elements from the list.
-    """
     last: Int
-
-    """
-    Ordering options for repositories returned from the connection
-    """
     orderBy: RepositoryOrder
-
-    """
-    Array of owner's affiliation options for repositories returned from the
-    connection. For example, OWNER will include only repositories that the
-    organization or user being viewed owns.
-    """
     ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR]
-
-    """
-    If non-null, filters repositories according to privacy. Internal
-    repositories are considered private; consider using the visibility argument
-    if only internal repositories are needed. Cannot be combined with the
-    visibility argument.
-    """
     privacy: RepositoryPrivacy
-
-    """
-    If non-null, filters repositories according to visibility. Cannot be combined with the privacy argument.
-    """
     visibility: RepositoryVisibility
   ): RepositoryConnection!
-
-  """
-  A URL pointing to the user's public website/blog.
-  """
   websiteUrl: URI
 }
 
-"""
-The possible durations that a user can be blocked for.
-"""
 enum UserBlockDuration {
-  """
-  The user was blocked for 1 day
-  """
   ONE_DAY
-
-  """
-  The user was blocked for 30 days
-  """
   ONE_MONTH
-
-  """
-  The user was blocked for 7 days
-  """
   ONE_WEEK
-
-  """
-  The user was blocked permanently
-  """
   PERMANENT
-
-  """
-  The user was blocked for 3 days
-  """
   THREE_DAYS
 }
 
-"""
-Represents a 'user_blocked' event on a given user.
-"""
 type UserBlockedEvent implements Node {
-  """
-  Identifies the actor who performed the event.
-  """
   actor: Actor
-
-  """
-  Number of days that the user was blocked for.
-  """
   blockDuration: UserBlockDuration!
-
-  """
-  Identifies the date and time when the object was created.
-  """
   createdAt: DateTime!
-
-  """
-  The Node ID of the UserBlockedEvent object
-  """
   id: ID!
-
-  """
-  The user who was blocked.
-  """
   subject: User
 }
 
-"""
-A list of users.
-"""
 type UserConnection {
-  """
-  A list of edges.
-  """
   edges: [UserEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [User]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edit on user content
-"""
 type UserContentEdit implements Node {
-  """
-  Identifies the date and time when the object was created.
-  """
   createdAt: DateTime!
-
-  """
-  Identifies the date and time when the object was deleted.
-  """
   deletedAt: DateTime
-
-  """
-  The actor who deleted this content
-  """
   deletedBy: Actor
-
-  """
-  A summary of the changes for this edit
-  """
   diff: String
-
-  """
-  When this content was edited
-  """
   editedAt: DateTime!
-
-  """
-  The actor who edited this content
-  """
   editor: Actor
-
-  """
-  The Node ID of the UserContentEdit object
-  """
   id: ID!
-
-  """
-  Identifies the date and time when the object was last updated.
-  """
   updatedAt: DateTime!
 }
 
-"""
-A list of edits to content.
-"""
 type UserContentEditConnection {
-  """
-  A list of edges.
-  """
   edges: [UserContentEditEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [UserContentEdit]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edge in a connection.
-"""
 type UserContentEditEdge {
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
   node: UserContentEdit
 }
 
-"""
-Represents a user.
-"""
 type UserEdge {
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
   node: User
 }
 
-"""
-Email attributes from External Identity
-"""
 type UserEmailMetadata {
-  """
-  Boolean to identify primary emails
-  """
   primary: Boolean
-
-  """
-  Type of email
-  """
   type: String
-
-  """
-  Email id
-  """
   value: String!
 }
 
-"""
-A user-curated list of repositories
-"""
 type UserList implements Node {
-  """
-  Identifies the date and time when the object was created.
-  """
   createdAt: DateTime!
-
-  """
-  The description of this list
-  """
   description: String
-
-  """
-  The Node ID of the UserList object
-  """
   id: ID!
-
-  """
-  Whether or not this list is private
-  """
   isPrivate: Boolean!
-
-  """
-  The items associated with this list
-  """
   items(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
     after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
     before: String
-
-    """
-    Returns the first _n_ elements from the list.
-    """
     first: Int
-
-    """
-    Returns the last _n_ elements from the list.
-    """
     last: Int
   ): UserListItemsConnection!
-
-  """
-  The date and time at which this list was created or last had items added to it
-  """
   lastAddedAt: DateTime!
-
-  """
-  The name of this list
-  """
   name: String!
-
-  """
-  The slug of this list
-  """
   slug: String!
-
-  """
-  Identifies the date and time when the object was last updated.
-  """
   updatedAt: DateTime!
-
-  """
-  The user to which this list belongs
-  """
   user: User!
 }
 
-"""
-The connection type for UserList.
-"""
 type UserListConnection {
-  """
-  A list of edges.
-  """
   edges: [UserListEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [UserList]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edge in a connection.
-"""
 type UserListEdge {
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
   node: UserList
 }
 
-"""
-Types that can be added to a user list.
-"""
 union UserListItems = Repository
 
-"""
-The connection type for UserListItems.
-"""
 type UserListItemsConnection {
-  """
-  A list of edges.
-  """
   edges: [UserListItemsEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [UserListItems]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edge in a connection.
-"""
 type UserListItemsEdge {
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
   node: UserListItems
 }
 
-"""
-Represents a suggested user list.
-"""
 type UserListSuggestion {
-  """
-  The ID of the suggested user list
-  """
   id: ID
-
-  """
-  The name of the suggested user list
-  """
   name: String
 }
 
-"""
-The user's description of what they're currently doing.
-"""
 type UserStatus implements Node {
-  """
-  Identifies the date and time when the object was created.
-  """
   createdAt: DateTime!
-
-  """
-  An emoji summarizing the user's status.
-  """
   emoji: String
-
-  """
-  The status emoji as HTML.
-  """
   emojiHTML: HTML
-
-  """
-  If set, the status will not be shown after this date.
-  """
   expiresAt: DateTime
-
-  """
-  The Node ID of the UserStatus object
-  """
   id: ID!
-
-  """
-  Whether this status indicates the user is not fully available on GitHub.
-  """
   indicatesLimitedAvailability: Boolean!
-
-  """
-  A brief message describing what the user is doing.
-  """
   message: String
-
-  """
-  The organization whose members can see this status. If null, this status is publicly visible.
-  """
   organization: Organization
-
-  """
-  Identifies the date and time when the object was last updated.
-  """
   updatedAt: DateTime!
-
-  """
-  The user who has this status.
-  """
   user: User!
 }
 
-"""
-The connection type for UserStatus.
-"""
 type UserStatusConnection {
-  """
-  A list of edges.
-  """
   edges: [UserStatusEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [UserStatus]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edge in a connection.
-"""
 type UserStatusEdge {
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
   node: UserStatus
 }
 
-"""
-Ordering options for user status connections.
-"""
 input UserStatusOrder {
-  """
-  The ordering direction.
-  """
   direction: OrderDirection!
-
-  """
-  The field to order user statuses by.
-  """
   field: UserStatusOrderField!
 }
 
-"""
-Properties by which user status connections can be ordered.
-"""
 enum UserStatusOrderField {
-  """
-  Order user statuses by when they were updated.
-  """
   UPDATED_AT
 }
 
-"""
-A domain that can be verified or approved for an organization or an enterprise.
-"""
 type VerifiableDomain implements Node {
-  """
-  Identifies the date and time when the object was created.
-  """
   createdAt: DateTime!
-
-  """
-  Identifies the primary key from the database.
-  """
   databaseId: Int
-
-  """
-  The DNS host name that should be used for verification.
-  """
   dnsHostName: URI
-
-  """
-  The unicode encoded domain.
-  """
   domain: URI!
-
-  """
-  Whether a TXT record for verification with the expected host name was found.
-  """
   hasFoundHostName: Boolean!
-
-  """
-  Whether a TXT record for verification with the expected verification token was found.
-  """
   hasFoundVerificationToken: Boolean!
-
-  """
-  The Node ID of the VerifiableDomain object
-  """
   id: ID!
-
-  """
-  Whether or not the domain is approved.
-  """
   isApproved: Boolean!
-
-  """
-  Whether this domain is required to exist for an organization or enterprise policy to be enforced.
-  """
   isRequiredForPolicyEnforcement: Boolean!
-
-  """
-  Whether or not the domain is verified.
-  """
   isVerified: Boolean!
-
-  """
-  The owner of the domain.
-  """
   owner: VerifiableDomainOwner!
-
-  """
-  The punycode encoded domain.
-  """
   punycodeEncodedDomain: URI!
-
-  """
-  The time that the current verification token will expire.
-  """
   tokenExpirationTime: DateTime
-
-  """
-  Identifies the date and time when the object was last updated.
-  """
   updatedAt: DateTime!
-
-  """
-  The current verification token for the domain.
-  """
   verificationToken: String
 }
 
-"""
-The connection type for VerifiableDomain.
-"""
 type VerifiableDomainConnection {
-  """
-  A list of edges.
-  """
   edges: [VerifiableDomainEdge]
-
-  """
-  A list of nodes.
-  """
   nodes: [VerifiableDomain]
-
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-
-  """
-  Identifies the total count of items in the connection.
-  """
   totalCount: Int!
 }
 
-"""
-An edge in a connection.
-"""
 type VerifiableDomainEdge {
   cursor: String!
   node: VerifiableDomain

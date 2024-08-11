@@ -23,3 +23,26 @@ query GetRepos($query: String!, $first: Int, $last: Int, $after: String, $before
     }
   }
 }
+
+query GetInfo($id: String!) {
+	node(id: $id){
+    ... on Repository {
+      id
+      name
+      primaryLanguage {
+        name
+      }
+      stargazers {
+        totalCount
+      }
+      licenseInfo {
+        name
+      }
+      languages(first: 10) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
