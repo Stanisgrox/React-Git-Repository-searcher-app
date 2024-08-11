@@ -75,7 +75,6 @@ export const repoSlice = createSlice({
         },
         repoSetSorting(state, action: PayloadAction<string>) {
             state.sorting = action.payload;
-            state.scrolled = 0;
         },
         repoSetScrolled(state, action: PayloadAction<number>) {
             state.scrolled = action.payload;
