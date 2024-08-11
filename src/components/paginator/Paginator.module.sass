@@ -8,6 +8,8 @@
 
 .paginatorWrapper select
     margin-right: 26px
+    margin-top: 14px
+    margin-bottom: 16px
     border: none
     font-size: 12px
     line-height: 20px
@@ -26,6 +28,27 @@
     line-height: 20px
     color: #00000099
     margin-right: 8px
+    margin-top: 14px
+
+.paginatorWrapper button
+    background: none
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.70492 6L8.29492 7.41L12.8749 12L8.29492 16.59L9.70492 18L15.7049 12L9.70492 6Z" fill="black" fill-opacity="0.56"/></svg>')
+    width: 48px
+    height: 48px
+    background-position: center
+    background-repeat: no-repeat
+    border: none
 
 .paginatorWrapper button:first-child
     margin-left: 26px
+    transform: scale(-1, 1)
+
+.paginatorWrapper button:disabled,
+.paginatorWrapper button[disabled]
+    opacity: 0.4
+
+.paginatorCounter
+    color: #000000DE
+    font-size: 12px
+    line-height: 20px
+    margin-top: 14px

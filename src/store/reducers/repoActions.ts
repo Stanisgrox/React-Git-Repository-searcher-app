@@ -26,3 +26,7 @@ export const repoSetPreviousPageMarker = (page: string | undefined) => (dispatch
 export const repoSetSorting = (sorting: string) => (dispatch: AppDispatch) => {
     dispatch(repoSlice.actions.repoSetSorting(sorting));
 }
+
+export const repoSetScrolled = (scrolled: number) => (dispatch: AppDispatch) => {
+    dispatch(repoSlice.actions.repoSetScrolled(scrolled));
+}

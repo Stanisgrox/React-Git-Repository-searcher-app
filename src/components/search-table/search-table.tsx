@@ -18,7 +18,15 @@ const SearchTable = () => {
                 <table>
                     <thead>
                         <tr>
-                            <td>
+                            <td
+                                onClick={() => {
+                                    switch (sorting) {
+                                        case 'name-asc': dispatch(repoSetSorting('name-desc')); break;
+                                        case 'name-desc':dispatch(repoSetSorting('name-asc')); break;
+                                        default:dispatch(repoSetSorting('name-desc')); break;
+                                    }
+                                }}
+                            >
                                 Название
                             </td>
                             <td
@@ -28,7 +36,6 @@ const SearchTable = () => {
                                         case 'language-desc':dispatch(repoSetSorting('language-asc')); break;
                                         default:dispatch(repoSetSorting('language-asc')); break;
                                     }
-                                    console.log(sorting)
                                 }}
                             >
                                 Язык
@@ -40,7 +47,6 @@ const SearchTable = () => {
                                         case 'forks-desc':dispatch(repoSetSorting('forks-asc')); break;
                                         default:dispatch(repoSetSorting('forks-desc')); break;
                                     }
-                                    console.log(sorting)
                                 }}
                             >
                                 Число форков
@@ -52,7 +58,6 @@ const SearchTable = () => {
                                         case 'stars-desc':dispatch(repoSetSorting('stars-asc')); break;
                                         default:dispatch(repoSetSorting('stars-desc')); break;
                                     }
-                                    console.log(sorting)
                                 }}
                             >
                                 Число звезд
@@ -64,7 +69,6 @@ const SearchTable = () => {
                                         case 'updated-desc':dispatch(repoSetSorting('updated-asc')); break;
                                         default:dispatch(repoSetSorting('updated-desc')); break;
                                     }
-                                    console.log(sorting)
                                 }}
                             >
                                 Дата обновления

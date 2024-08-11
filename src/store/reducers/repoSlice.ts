@@ -11,7 +11,8 @@ interface ReposState {
     before: string | undefined,
     first: number | undefined,
     last: number | undefined,
-    sorting: string
+    sorting: string,
+    scrolled: number
 }
 
 const initialState: ReposState = {
@@ -25,7 +26,8 @@ const initialState: ReposState = {
     before: undefined,
     first: 10,
     last: undefined,
-    sorting: ''
+    sorting: '',
+    scrolled: 0
 };
 
 export const repoSlice = createSlice({
@@ -40,11 +42,16 @@ export const repoSlice = createSlice({
         },
         repoSetSearchTerm(state, action: PayloadAction<string | undefined>) {
             state.searchTerm = action.payload;
+            state.sorting = '';
+            state.scrolled = 0;
         },
         repoSetPageAmount(state, action: PayloadAction<number>) {
             state.pageAmount = action.payload;
             if (state.first) state.first = Number(action.payload);
-            else state.last = Number(action.payload)
+            else state.last = Number(action.payload);
+            state.scrolled = 0;
+            state.after = undefined
+            state.before = undefined
         },
         repoSetNextPageMarker(state, action: PayloadAction<string | undefined>) {
             state.after = action.payload;
@@ -60,6 +67,10 @@ export const repoSlice = createSlice({
         },
         repoSetSorting(state, action: PayloadAction<string>) {
             state.sorting = action.payload;
+            state.scrolled = 0;
+        },
+        repoSetScrolled(state, action: PayloadAction<number>) {
+            state.scrolled = action.payload;
         }
     }
 });
