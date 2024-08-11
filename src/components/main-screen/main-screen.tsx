@@ -31,7 +31,7 @@ const MainScreen = () => {
                             </h2>
                             <div className={styles.repoMainInfo}>
                                 <Tag primary = {true}>{data.node.primaryLanguage? data.node.primaryLanguage.name : "N/A"}</Tag>
-                                <div><img src='/assets/star.svg'/>{data.node.stargazers.totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</div>
+                                <div className={styles.stargazers}><img src='/assets/star.svg' alt='star sign'/>{data.node.stargazers.totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</div>
                             </div>
                             <div className={styles.repoLangs}>
                                 {
