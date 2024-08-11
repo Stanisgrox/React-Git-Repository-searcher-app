@@ -55,4 +55,9 @@ export interface LangInfo {
 
 /*
     Интерфейсы, которые я написал, пока разбирался в https://docs.github.com/ru/graphql/overview/explorer
+    IRepos - представление репозиториев для поисковой таблицы
+    RTKQueryAnswer - ответ на поисковый запрос таблицы (data в GraphQL пропускается, долго ловил этот баг)
+    RTKInfoQueryAnswer - ответ на запрос репозитория по ID. Лицензия и основной язык могут быть NULL, если languages нет, то там просто пустой массив
+
+    LangInfo - Нужно только одно поле для тэгов по языкам - название.
 */
