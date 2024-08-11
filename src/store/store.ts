@@ -2,6 +2,10 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import repoReducer from './reducers/repoSlice';
 import { reposAPI } from "../services/repos";
 
+/*
+    Инициализация хранилища и middleware для асинхронных запросов.
+*/
+
 const rootReducer = combineReducers({
     repoReducer,
     [reposAPI.reducerPath]: reposAPI.reducer

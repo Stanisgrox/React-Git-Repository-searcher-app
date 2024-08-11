@@ -3,6 +3,27 @@ import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
 import { repoSetNextPageMarker, repoSetPageAmount, repoSetPreviousPageMarker, repoSetScrolled } from '../../store/reducers/repoActions';
 import styles from './Paginator.module.sass';
 
+/*
+    Пагинатор к таблице.
+    Здесь находятся переменные из Redux (строка 14):
+        searchTerm - Пользовательский ввод в поисковую строку.
+        after - маркер из API Github для пагинации, чтобы перейти на следующую страницу
+        before - как after, только на предыдущую
+        first - N (выбирается в select) первых элементов, используется, чтобы выбирать первоначальный запрос и _следующие_ страницы.
+        last - N элементов, чтобы отправить запрос на предыдущую страницу.
+        sorting - вид сортировки. Я выполняю сортировку посредством отправления запроса на API.
+        scrolled - маркер, сколько страниц было пролистано, чтобы посчитать в пагинаторе
+    Помимо Redux тут так же выполняется один из двух запросов RTKQuery (запросы одинаковые, поэтому фактически он один).
+    Его строка полностью соответствует аналогичному в search-table.tsx.
+    data - данные, полученные из API, подробнее о типе данных в /types/typings.ts RTKQueryAnswer
+    isFetching здесь нужен для блокировки кнопок во время прогрузки. Если не будет проверки, кнопки можно будет нажимать во время
+    запроса. Это не сломает таблицу, но сломает счетчик пагинатора.
+
+    При изменении инпута отправляется запрос в хранилище на изменение размера запроса. Подробнее в /store/reducers/repoSlice.ts
+    Кнопка влево и вправо меняют соответствующие указатели и меняет местами first и last. Один становится равен количеству
+    предметов в запросе, а второй undefined. Так осуществляется пагинация силами GraphQL
+*/
+
 const Paginator = () => {
     
     const {searchTerm, after, before, first, last, sorting, scrolled} = useAppSelector(state =>  state.repoReducer);

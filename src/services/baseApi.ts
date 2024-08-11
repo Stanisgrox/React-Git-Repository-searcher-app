@@ -6,6 +6,10 @@ const BASE_URL = "https://api.github.com/graphql"
 
 export const client: any = new GraphQLClient(BASE_URL)
 
+/*
+  Базовый сетап для RTKQuery, но с модулем "graphql-request". Здесь передается токен из .env для авторизации.
+  Endpoints не нужны /graphql только один.
+*/
 
 const graphqlBaseQuery = graphqlRequestBaseQuery({
   client,

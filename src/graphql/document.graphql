@@ -1,3 +1,7 @@
+# Этот конструктор запроса ищет все репозитории, которые удовлетворяют условиям поиска и возвращает необходимые поля.
+# Функция, которая его вызывает находится в search-table.tsx и paginator.tsx
+# schema.graphql была скачана с Github. 
+
 query GetRepos($query: String!, $first: Int, $last: Int, $after: String, $before: String) {
   search(query: $query, type: REPOSITORY, first: $first, last: $last,after: $after, before: $before) {
     repositoryCount
@@ -23,6 +27,10 @@ query GetRepos($query: String!, $first: Int, $last: Int, $after: String, $before
     }
   }
 }
+
+# Этот конструктор запрашивает конкретный репозиторий по его ID.
+# Функция, которая его вызывает находится в main-screen.tsx
+# schema.graphql была скачана с Github. 
 
 query GetInfo($id: ID!) {
 	node(id: $id){

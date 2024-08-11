@@ -5,15 +5,26 @@ import SearchTable from '../search-table/search-table';
 import { Tag } from '../UI/tag';
 import { reposAPI } from '../../services/repos';
 
+/*
+    MainScreen - основная обертка, где располагается таблица с результатами - SearchTable и ее Paginator
+    Переменные из Redux:
+        Welcome - ничего не было загружено, показывается приветственное сообщение
+        !Welcome - Был совершен запрос, необходимо отрендерить интерфейс таблицы (в ней же содержится плейсхолдер для загрузки) и sidebar
+        previewID - ID репозитория, который был выбран для подробного просмотра. Если он равен пустой строке, то отображается плейсхолдер
+    Data - результат запроса подробностей о репозитории и isFetching его прогресс из RTKQuery
+    Поробнее о структуре data в /types/typings.ts RTKInfoQueryAnswer;
+    PrimaryLanguage и LicenseInfo могут быть NULL, поэтому они проверяются перед выводом. Если они NULL - выводится N/A и License is not available соответственно.
+*/
+
 const MainScreen = () => {
 
-    const {welcome, reposLoaded, previewID} = useAppSelector(state =>  state.repoReducer);
-    const {data} = reposAPI.useGetInfoQuery({id: previewID});
+    const {welcome, previewID} = useAppSelector(state =>  state.repoReducer);
+    const {data, isFetching} = reposAPI.useGetInfoQuery({id: previewID});
 
     return (
         <div className={welcome? styles.helloScreen : styles.mainSearch}>
             {welcome && <h1>{`Добро пожаловать`}</h1>}
-            {reposLoaded && 
+            {!welcome && 
             <>
                 <div className={styles.resultsWindow}>
                     <SearchTable />
@@ -22,7 +33,7 @@ const MainScreen = () => {
                 <div className={styles.sidebar}>
                     {data?.node === undefined? 
                         <div className={styles.placeholder}>
-                            Выберите репозиторий
+                            {isFetching? 'Загрузка...' : 'Выберите репозиторий'}
                         </div>
                         :
                         <div className={styles.repoInfo}>

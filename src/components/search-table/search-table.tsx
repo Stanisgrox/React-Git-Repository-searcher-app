@@ -3,6 +3,20 @@ import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
 import { infoSetID, repoSetSorting } from '../../store/reducers/repoActions';
 import styles from './SearchTable.module.sass';
 
+/*
+    Таблица поиска - главный герой.
+    Здесь берутся те же переменные из Reducer, что и в пагинаторе. Они так же составляют тело запроса.
+
+    Data - данные, полученные из API, подробнее о типе данных в /types/typings.ts RTKQueryAnswer.
+    isFetching - состояние RTKQuery, которое возвращает True, если сейчас идет загрузка, чтобы показать плейсхолдер.
+
+    При нажатии на ячейки заголовка в Redux меняется sorting. Всего возможно 10 значений: 5 параметров и 2 их варианта.
+    Одновременная сортировка не предусмотрена техническим заданием.
+
+    Так же при нажатии и сортировке появляется картинка. В зависимости от DESC/ASC она может применить на себя второй стиль
+    "arrowdown", который отражает ее по оси Y.
+*/
+
 const SearchTable = () => {
 
     const {searchTerm, after, before, last, first, sorting} = useAppSelector(state =>  state.repoReducer);

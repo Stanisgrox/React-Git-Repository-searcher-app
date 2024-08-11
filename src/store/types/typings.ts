@@ -52,3 +52,7 @@ export interface RTKInfoQueryAnswer {
 export interface LangInfo {
     name: string
 }
+
+/*
+    Интерфейсы, которые я написал, пока разбирался в https://docs.github.com/ru/graphql/overview/explorer
+*/

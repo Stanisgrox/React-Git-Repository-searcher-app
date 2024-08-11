@@ -1,6 +1,13 @@
 import { AppDispatch } from "../store";
 import { repoSlice } from "./repoSlice";
 
+/*
+    Действия, которые выполняют операции в Slice. Изначально, здесь находилась логика, осуществляющая запросы, но RTKQuery
+    забрал эту работу.
+
+    Подробнее о назначении функций в repoSlice.ts
+*/
+
 export const searchClicked = () => async (dispatch: AppDispatch) => {;
     dispatch(repoSlice.actions.repoWelcomeLeft());
 }

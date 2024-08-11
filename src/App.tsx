@@ -1,6 +1,9 @@
 import SearchBar from './components/search-bar/search-bar';
 import MainScreen from './components/main-screen/main-screen';
 import Footer from './components/footer/footer';
+/*
+  APP.TSX
+*/
 
 function App() {
   return (
