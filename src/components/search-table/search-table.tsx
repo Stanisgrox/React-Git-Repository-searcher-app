@@ -33,6 +33,7 @@ const SearchTable = () => {
                                     style={{
                                         display: `${sorting === 'name-asc'  || sorting ==='name-desc' ? 'inline-block' : 'none'}`
                                     }}
+                                    alt=''
                                 />
                                 Название
                             </td>
@@ -51,6 +52,7 @@ const SearchTable = () => {
                                     style={{
                                         display: `${sorting === 'language-asc'  || sorting ==='language-desc' ? 'inline-block' : 'none'}`
                                     }}
+                                    alt=''
                                 />
                                 Язык
                             </td>
@@ -69,6 +71,7 @@ const SearchTable = () => {
                                     style={{
                                         display: `${sorting === 'forks-asc'  || sorting ==='forks-desc' ? 'inline-block' : 'none'}`
                                     }}
+                                    alt=''
                                 />
                                 Число форков
                             </td>
@@ -87,6 +90,7 @@ const SearchTable = () => {
                                     style={{
                                         display: `${sorting === 'stars-asc'  || sorting ==='stars-desc' ? 'inline-block' : 'none'}`
                                     }}
+                                    alt=''
                                 />
                                 Число звезд
                             </td>
@@ -105,6 +109,7 @@ const SearchTable = () => {
                                     style={{
                                         display: `${sorting === 'updated-asc'  || sorting ==='updated-desc' ? 'inline-block' : 'none'}`
                                     }}
+                                    alt=''
                                 />
                                 Дата обновления
                             </td>
