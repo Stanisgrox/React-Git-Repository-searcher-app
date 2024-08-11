@@ -1,6 +1,7 @@
 import { reposAPI } from '../../services/repos';
 import { useAppdispatch, useAppSelector } from '../../store/hooks/redux';
-import { infoSetID, repoSetSorting } from '../../store/reducers/repoActions';
+import { infoSetID } from '../../store/reducers/repoActions';
+import { TableCaption } from './search-table-caption';
 import styles from './SearchTable.module.sass';
 
 /*
@@ -10,11 +11,12 @@ import styles from './SearchTable.module.sass';
     Data - данные, полученные из API, подробнее о типе данных в /types/typings.ts RTKQueryAnswer.
     isFetching - состояние RTKQuery, которое возвращает True, если сейчас идет загрузка, чтобы показать плейсхолдер.
 
-    При нажатии на ячейки заголовка в Redux меняется sorting. Всего возможно 10 значений: 5 параметров и 2 их варианта.
-    Одновременная сортировка не предусмотрена техническим заданием.
-
-    Так же при нажатии и сортировке появляется картинка. В зависимости от DESC/ASC она может применить на себя второй стиль
-    "arrowdown", который отражает ее по оси Y.
+    search-table-caption.tsx
+        При нажатии на ячейки заголовка в Redux меняется sorting. Всего возможно 10 значений: 5 параметров и 2 их варианта.
+        Одновременная сортировка не предусмотрена техническим заданием.
+    
+        Так же при нажатии и сортировке появляется картинка. В зависимости от DESC/ASC она может применить на себя второй стиль
+        "arrowdown", который отражает ее по оси Y.
 */
 
 const SearchTable = () => {
@@ -32,101 +34,11 @@ const SearchTable = () => {
                 <table>
                     <thead>
                         <tr>
-                            <td
-                                onClick={() => {
-                                    switch (sorting) {
-                                        case 'name-asc': dispatch(repoSetSorting('name-desc')); break;
-                                        case 'name-desc':dispatch(repoSetSorting('name-asc')); break;
-                                        default:dispatch(repoSetSorting('name-desc')); break;
-                                    }
-                                }}
-                            >
-                                <img 
-                                    src='/assets/arrow.svg' 
-                                    className={`${styles.arrowup} ${sorting === 'name-desc'? styles.arrowdown : ''}`}
-                                    style={{
-                                        display: `${sorting === 'name-asc'  || sorting ==='name-desc' ? 'inline-block' : 'none'}`
-                                    }}
-                                    alt=''
-                                />
-                                Название
-                            </td>
-                            <td
-                                onClick={() => {
-                                    switch (sorting) {
-                                        case 'language-asc': dispatch(repoSetSorting('language-desc')); break;
-                                        case 'language-desc':dispatch(repoSetSorting('language-asc')); break;
-                                        default:dispatch(repoSetSorting('language-asc')); break;
-                                    }
-                                }}
-                            >
-                                <img 
-                                    src='/assets/arrow.svg' 
-                                    className={`${styles.arrowup} ${sorting === 'language-desc'? styles.arrowdown : ''}`}
-                                    style={{
-                                        display: `${sorting === 'language-asc'  || sorting ==='language-desc' ? 'inline-block' : 'none'}`
-                                    }}
-                                    alt=''
-                                />
-                                Язык
-                            </td>
-                            <td
-                                onClick={() => {
-                                    switch (sorting) {
-                                        case 'forks-asc': dispatch(repoSetSorting('forks-desc')); break;
-                                        case 'forks-desc':dispatch(repoSetSorting('forks-asc')); break;
-                                        default:dispatch(repoSetSorting('forks-desc')); break;
-                                    }
-                                }}
-                            >
-                                <img 
-                                    src='/assets/arrow.svg' 
-                                    className={`${styles.arrowup} ${sorting === 'forks-desc'? styles.arrowdown : ''}`}
-                                    style={{
-                                        display: `${sorting === 'forks-asc'  || sorting ==='forks-desc' ? 'inline-block' : 'none'}`
-                                    }}
-                                    alt=''
-                                />
-                                Число форков
-                            </td>
-                            <td
-                                onClick={() => {
-                                    switch (sorting) {
-                                        case 'stars-asc': dispatch(repoSetSorting('stars-desc')); break;
-                                        case 'stars-desc':dispatch(repoSetSorting('stars-asc')); break;
-                                        default:dispatch(repoSetSorting('stars-desc')); break;
-                                    }
-                                }}
-                            >
-                                <img 
-                                    src='/assets/arrow.svg' 
-                                    className={`${styles.arrowup} ${sorting === 'stars-desc'? styles.arrowdown : ''}`}
-                                    style={{
-                                        display: `${sorting === 'stars-asc'  || sorting ==='stars-desc' ? 'inline-block' : 'none'}`
-                                    }}
-                                    alt=''
-                                />
-                                Число звезд
-                            </td>
-                            <td
-                                onClick={() => {
-                                    switch (sorting) {
-                                        case 'updated-asc': dispatch(repoSetSorting('updated-desc')); break;
-                                        case 'updated-desc':dispatch(repoSetSorting('updated-asc')); break;
-                                        default:dispatch(repoSetSorting('updated-desc')); break;
-                                    }
-                                }}
-                            >
-                                <img 
-                                    src='/assets/arrow.svg' 
-                                    className={`${styles.arrowup} ${sorting === 'updated-desc'? styles.arrowdown : ''}`}
-                                    style={{
-                                        display: `${sorting === 'updated-asc'  || sorting ==='updated-desc' ? 'inline-block' : 'none'}`
-                                    }}
-                                    alt=''
-                                />
-                                Дата обновления
-                            </td>
+                            <TableCaption field='name'>Название</TableCaption>
+                            <TableCaption field='language'>Язык</TableCaption>
+                            <TableCaption field='forks'>Число форков</TableCaption>
+                            <TableCaption field='stars'>Число звезд</TableCaption>
+                            <TableCaption field='updated'>Дата обновления</TableCaption>
                         </tr>
                     </thead>
                     {isFetching? <>
