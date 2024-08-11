@@ -52,7 +52,7 @@ const SearchTable = () => {
                                         {node.stargazers.totalCount}
                                     </td>
                                     <td>
-                                        {node.defaultBranchRef.target.committedDate.split('T')[0].split('-').reverse().join('.')}
+                                        {node.defaultBranchRef? node.defaultBranchRef.target.committedDate.split('T')[0].split('-').reverse().join('.') : "N/A"}
                                     </td>
                                 </tr>
                             )}
